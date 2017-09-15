@@ -59,6 +59,16 @@ var Main = React.createClass({
     });
   },
 
+  setSaved: function(saved) {
+    console.log(saved);
+    this.setState({
+      term: search.term,
+      number: search.number,
+      start: search.start,
+      end: search.end,
+    });
+  },
+
   render: function () {
     return (
       <div className="container">
