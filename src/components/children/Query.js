@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 export class Search extends React.Component {
     constructor(props) {
@@ -10,7 +10,7 @@ export class Search extends React.Component {
             end: ""
         };
 
-        // this.handleChange = this.handleChange.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     handleChange(event) {
@@ -23,7 +23,6 @@ export class Search extends React.Component {
         event.preventDefault();
         this.props.setSearch(this.state.term, this.state.start, this.state.end);
     }
-
 
     render() {
         return (

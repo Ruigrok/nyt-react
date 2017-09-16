@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 
 import { Query } from './children/Query';
 import { Results } from './children/Results';
