@@ -1,3 +1,43 @@
+import React, { Component } from 'react';
+
+import { Query } from './children/Query';
+import { Results } from './children/Results';
+import { helpers } from '../utils/helpers';
+
+export class Search extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      results: {}
+    };
+
+    this.setSearch = this.setSearch.bind(this);
+  }
+
+  setSearch(newTerm, newStart, newEnd) {
+    helpers.runQuery(newTerm, newStart, newEnd)
+      .then(function (data) {
+        this.setState({
+          results: data
+        });
+      })
+  }
+
+  render() {
+    return (
+      <div className="container">
+        {/* Query child compononent is passed a function to return the user input to the Search parent component */}
+        <Query newSearch={this.setSearch} />
+        {/* Results receives the results from setSearch */}
+        <Results results={this.state.results} />
+      </div>
+    );
+  }
+
+}
+
+
 /* var React = require("react");
 
 var Search = React.createClass({
