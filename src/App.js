@@ -1,6 +1,25 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Main } from './components/Main';
-import './App.css';
+import { Router, Route, IndexRoute, browserHistory } from 'react-router'
 
-ReactDOM.render(<Main />, document.getElementById("app"));
+import { Main } from './components/Main';
+import { Search } from './components/Search';
+import { Saved } from './components/Saved';
+
+class App extends Component {
+  render() {
+    return (
+      <Router history={browserHistory}>
+        <Route path="/" component={Main}>
+
+          <Route path="Search" component={Search} />
+          <Route path="Saved" component={Saved} />
+
+          <IndexRoute component={Search} />
+
+        </Route>
+      </Router>
+    )
+  }
+}
+
+export default App;

@@ -1,12 +1,32 @@
-var React = require("react");
+import React from 'react';
 
-var Search = require("./children/Search");
-var Results = require("./children/Results");
-var Saved = require("./children/Saved");
+export class Main extends React.Component {
+  render() {
+    return (
+      <div>
 
-var helpers = require("./utils/helpers");
+        <div className="jumbotron">
+          <h2 className="text-center"><strong><i className="fa fa-newspaper-o"></i> New York Times Search</strong></h2>
+        </div>
 
-var Main = React.createClass({
+        {/* For displaying sub-components */}
+        {this.props.children}
+
+      <footer className="footer">
+        
+        <div className="text-center" style={{marginTop: 8, marginBottom: 8}}>
+          <p>by Andrew Ruigrok</p>
+          <a href="https://github.com/Ruigrok/nyt-react" alt="Link to Github"><i className="fa fa-github fa-2x" aria-hidden="true"></i></a>           
+        </div>
+
+      </footer>
+      </div> 
+    );
+  }
+}
+
+
+/* var Main = React.createClass({
 
   getInitialState: function () {
     return {
@@ -20,23 +40,23 @@ var Main = React.createClass({
   },
 
   componentDidMount: function () {
-/*     helpers.getSaved().then(function (response) {
-      if (response !== this.state.saved) {
-        this.setState({ saved: response.data });
-      }
-    }.bind(this)); */
+        helpers.getSaved().then(function (response) {
+          if (response !== this.state.saved) {
+            this.setState({ saved: response.data });
+          }
+        }.bind(this)); 
   },
 
   componentDidUpdate: function () {
-    
+
     helpers.runQuery(this.state.term, this.state.start, this.state.end)
       .then(function (data) {
         console.log(data);
         console.log(this.state.results);
         if (data.length !== this.state.results.length
-            || this.state.results == [] 
-            || data[0].headline.main !== this.state.results[0].headline.main) {
-          this.setState({ results: data});
+          || this.state.results == []
+          || data[0].headline.main !== this.state.results[0].headline.main) {
+          this.setState({ results: data });
 
           helpers.postArticles(this.state.searchTerm).then(function () {
 
@@ -59,7 +79,7 @@ var Main = React.createClass({
     });
   },
 
-  setSaved: function(saved) {
+  setSaved: function (saved) {
     console.log(saved);
     this.setState({
       term: search.term,
@@ -73,7 +93,7 @@ var Main = React.createClass({
     return (
       <div className="container">
 
-        <div className="jumbotron" styles={{backgroundColor : '#20315A',  color: 'white'}}>
+        <div className="jumbotron" styles={{ backgroundColor: '#20315A', color: 'white' }}>
           <h1 className="text-center"><strong><i className="fa fa-newspaper-o"></i> New York Times Search</strong></h1>
         </div>
 
@@ -96,3 +116,4 @@ var Main = React.createClass({
 });
 
 module.exports = Main;
+ */
