@@ -1,5 +1,6 @@
 // Include Server Dependencies
 const express = require("express");
+const path = require('path');
 const bodyParser = require("body-parser");
 const logger = require("morgan");
 const mongoose = require("mongoose");
@@ -9,7 +10,7 @@ var Article = require('./models/Article');
 // Create Instance of Express
 const app = express();
 // Sets an initial port. We'll use this later in our listener
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 8080;
 
 // Run Morgan for Logging
 app.use(logger("dev"));
@@ -19,7 +20,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
 app.use(bodyParser.json({ type: "application/vnd.api+json" }));
 
-app.use(express.static("public"));
+//app.use(express.static("public"));
+
+app.use(express.static(path.resolve(__dirname, './client/public')));
 
 // -------------------------------------------------
 
@@ -27,38 +30,37 @@ app.use(express.static("public"));
 mongoose.Promise = global.Promise;
 
 const db = mongoose.connect('mongodb://localhost/nytreact', {
-    useMongoClient: true
+  useMongoClient: true
 });
 
 db
-.then(function (db) {
+  .then(function (db) {
     console.log('mongodb has been connected');
-})
-.catch(function (err) {
+  })
+  .catch(function (err) {
     console.log('error while trying to connect with mongodb');
-});
+  });
 // -------------------------------------------------
 
 
 // Get saved articles
-app.get('/api/saved', function(req, res) {
+app.get('/api/saved', function (req, res) {
 
   // We will find all the records, sort it in descending order, then limit the records to 5
-  Article.find({})
-  .exec(function(err, doc) {
+  Article.find({}, function (err, doc) {
     if (err) {
       console.log(err);
     }
     else {
       res.send(doc);
     }
-  });
+  })
 });
 
 // Save an article
-app.post('/api/saved', function(req, res) {
+app.post('/api/saved', function (req, res) {
 
-  Article.create(req.body, function(err) {
+  Article.create(req.body, function (err, doc) {
     if (err) {
       console.log(err);
     }
@@ -69,21 +71,22 @@ app.post('/api/saved', function(req, res) {
 });
 
 // Delete an article
-app.delete('/api/saved', function(req, res) {
-  var url = req.param('url');
+app.delete('/api/saved/:id', function (req, res) {
+  //var articleUrl = req.params.id;
 
-  Article.find({ url: url }).remove().exec(function(err) {
+  Article.findById(req.params.id).remove().exec(function (err, doc) {
     if (err) {
       console.log(err);
     }
     else {
       res.send(doc);
+      console.log(doc);
     }
   });
 })
 
 // All non-API get routes
-app.get('*', function(req, res) {
+app.get('*', function (req, res) {
   res.sendFile(__dirname + '/public/index.html');
 });
 
@@ -93,6 +96,6 @@ app.get('*', function(req, res) {
 // Listener
 app.listen(PORT, error => {
   error
-  ? console.error(error)
-  : console.info(`Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`)
+    ? console.error(error)
+    : console.info(`Listening on port ${PORT}. Visit http://localhost:${PORT}/ in your browser.`)
 });

@@ -1,22 +1,26 @@
 {
-  "name": "my-app",
-  "version": "0.1.0",
-  "private": true,
+  "name": "nyt-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ruigrok/nyt-react.git"
+  },
+  "author": "Andrew Ruigrok",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ruigrok/nyt-react/issues"
+  },
+  "homepage": "https://github.com/Ruigrok/nyt-react#readme",
   "dependencies": {
     "body-parser": "^1.18.1",
     "express": "^4.15.4",
-    "mongoose": "^4.11.11",
-    "morgan": "^1.8.2",
-    "nodemon": "^1.12.1",
-    "react": "^15.6.1",
-    "react-dom": "^15.6.1",
-    "react-router": "^2.5.2",
-    "react-scripts": "1.0.13"
-  },
-  "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "mongoose": "^4.11.12",
+    "morgan": "^1.8.2"
   }
 }

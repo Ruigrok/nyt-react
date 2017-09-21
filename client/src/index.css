@@ -1,0 +1,56 @@
+
+html, body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+#root {
+  flex: 1 0 auto;
+}
+
+.jumbotron,
+footer {
+  background-color: #20315A;
+  color: #FFFFFF;
+}
+
+.panel-primary {
+  border-color: #20315A;
+}
+
+.panel-primary>.panel-heading {
+  background-color: #20315A;
+  border-color: #20315A;
+}
+
+.btn {
+  background-color: #20315A;
+  border-color: #20315A;
+}
+
+.view {
+  background-color: #344570;
+  border-color: #344570;
+}
+
+.save {
+  background-color: #53638A;
+  border-color: #53638A;
+  margin-left: 5px;
+}
+
+footer {
+  text-align: center;
+  padding: 10px;
+}
+
+footer>p {
+  margin: 0 0 6px;
+}
+
+
